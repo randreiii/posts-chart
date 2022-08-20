@@ -6,12 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
-  // uri: "https://fakerql.goosfraba.ro/graphql",
-  uri: "https://rickandmortyapi.com/graphql",
+  uri: "https://fakerql.goosfraba.ro/graphql",
+  // uri: "https://rickandmortyapi.com/graphql",
   cache: new InMemoryCache()
 })
 
-console.log(client)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
