@@ -3,9 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 
 const GET_POSTS = gql`
 query {
-    allPosts(count: 500) {
-        id 
-        title
+    allPosts(count: 367) {
         createdAt
     }
 }
