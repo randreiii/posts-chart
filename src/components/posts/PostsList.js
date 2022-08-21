@@ -19,8 +19,8 @@ const PostsList = () => {
         })
     }
 
+    console.log(data.allPosts)
     getMonthFromDate();
-    console.log(months);
 
     let monthsFreq = months.reduce((acc, curr) => {
         if (typeof acc[curr] === 'undefined') {
@@ -30,9 +30,7 @@ const PostsList = () => {
         }
         return acc;
       }, {});
-    
-      console.log(monthsFreq);
-    
+        
 
     if (loading) return <p>loading...</p>
     if (error) return <p>something went wrong</p>
