@@ -18,5 +18,6 @@ For this I have chosen Apollo client framework.
 For this, I have decided to use visx with d3 js. 
 
 Challanges faced during the process: 
--> make the bars pop up for each month on the histogram
+
+-> make the bars pop up for each month on the histogram <br/>
 -> position of the tooltip that will show the specific number of posts created for a month 
