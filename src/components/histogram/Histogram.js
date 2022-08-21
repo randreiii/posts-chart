@@ -4,18 +4,36 @@ import { AxisBottom, AxisLeft } from "@visx/axis";
 import useMeasure from "react-use-measure";
 import styled from "styled-components";
 import { Group } from "@visx/group";
-
+import { TooltipWithBounds, useTooltip, defaultStyles } from "@visx/tooltip";
+import { localPoint } from "@visx/event";
 
 const Container = styled.div`
   width: 600px;
   height: 500px;
+  position: relative;
 `;
+
+const tooltipStyles = {
+    ...defaultStyles,
+    borderRadius: 4,
+    background: "black",
+    color: "white",
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+  };
 
 const margin = 55;
 
 const Histogram = ({data}) => {
-    console.log(data)
   const [ref, bounds] = useMeasure();
+  const {
+  showTooltip,
+  hideTooltip,
+  tooltipData,
+  tooltipLeft = 0,
+  tooltipTop = 0,
+} = useTooltip();
+
 
   const width = bounds.width || 100;
   const height = bounds.height || 100;
@@ -46,7 +64,7 @@ const Histogram = ({data}) => {
   return (
   
       <Container ref={ref}>
-        <svg width="100%" height="100%">
+        <svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`}>
           <Group>
             {Object.entries(data).map((month, key) => {
               const xValue = getXValue(month);
@@ -63,6 +81,19 @@ const Histogram = ({data}) => {
                   width={barWidth}
                   height={barHeight}
                   fill="orange"
+                  onMouseMove={(event) => {
+                    const point = localPoint(event);
+                    // const { x } = localPoint(event) || {x: 0};
+                    if (!point) return;
+
+                    showTooltip({
+                      tooltipData:  month,
+                      tooltipLeft: point.x,
+                      tooltipTop: yScale(getYValue(month)),
+                     
+                    });
+                  }}
+                  onMouseLeave={() => hideTooltip()}
                 />
               );
             })}
@@ -80,6 +111,18 @@ const Histogram = ({data}) => {
             <AxisLeft left={margin} scale={yScale} label={'Number of posts'} />
           </Group>
         </svg>
+
+        {tooltipData ? (
+          <TooltipWithBounds
+            key={Math.random()}
+            top={tooltipTop}
+            left={tooltipLeft}
+            style={tooltipStyles}
+          >
+            <b>{getYValue(tooltipData)}</b>
+          </TooltipWithBounds>
+        ) : null}
+
 
       </Container>
  
