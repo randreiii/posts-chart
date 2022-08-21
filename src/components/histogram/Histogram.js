@@ -15,12 +15,10 @@ const Container = styled.div`
 
 const tooltipStyles = {
     ...defaultStyles,
-    borderRadius: 4,
-    background: "black",
+    borderRadius: '50%',
+    background: "#18283B",
     color: "white",
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
-  };
+    };
 
 const margin = 55;
 
@@ -80,10 +78,9 @@ const Histogram = ({data}) => {
                   y={barY}
                   width={barWidth}
                   height={barHeight}
-                  fill="orange"
+                  fill="#A3C44B"
                   onMouseMove={(event) => {
                     const point = localPoint(event);
-                    // const { x } = localPoint(event) || {x: 0};
                     if (!point) return;
 
                     showTooltip({
@@ -122,7 +119,6 @@ const Histogram = ({data}) => {
             <b>{getYValue(tooltipData)}</b>
           </TooltipWithBounds>
         ) : null}
-
 
       </Container>
  

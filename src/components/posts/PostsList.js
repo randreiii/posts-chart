@@ -40,13 +40,6 @@ const PostsList = () => {
     return (
         <div>
         <Histogram data={monthsFreq}/>
-          {/* {data.allPosts.map((post, key) => {
-            return (
-                <div key={key}>
-                    <h3>{post.createdAt}</h3>
-                </div>
-            )
-          })}   */}
         </div>
     )
 }
